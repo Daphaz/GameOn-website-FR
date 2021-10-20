@@ -1,0 +1,107 @@
+.banner {
+	&.container {
+		max-width: 1239px;
+		margin-bottom: 99px;
+
+		@include lg {
+			margin-bottom: 48px;
+		}
+
+		@include md {
+			margin-bottom: 0px;
+		}
+	}
+	position: relative;
+	width: 100%;
+	min-height: 657px;
+	background-color: $clr_black;
+	color: $clr_white;
+	padding: 56px 53px 0px;
+	border-radius: 8px;
+	box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
+	overflow: hidden;
+
+	&__content {
+		position: relative;
+		text-align: left;
+		z-index: 1;
+	}
+
+	&__title {
+		@extend %title-96;
+		padding-bottom: 73px;
+		max-width: 670px;
+
+		@include lg {
+			padding-bottom: 40px;
+		}
+		@include md {
+			max-width: 374px;
+		}
+		@include sm {
+			padding: 20px 0;
+		}
+	}
+
+	&__description {
+		@extend %description-24;
+		max-width: 430px;
+		padding-bottom: 73px;
+
+		@include lg {
+			padding-bottom: 32px;
+			max-width: 100%;
+		}
+		@include sm {
+			font-size: 1.3rem;
+			line-height: 16.93px;
+			padding-bottom: 20px;
+		}
+	}
+
+	button {
+		position: relative;
+		z-index: 1;
+	}
+
+	&__img {
+		position: absolute;
+		object-fit: cover;
+		width: 100%;
+		max-width: 730px;
+		height: 100%;
+		top: 0;
+		bottom: 0;
+		right: 0;
+
+		@include lg {
+			display: block;
+			position: inherit;
+			border-radius: 8px;
+			margin: 0 auto;
+			margin-bottom: 24px;
+		}
+	}
+
+	@media screen and (max-width: 1239px) {
+		padding: 56px 100px 70px;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	@include lg {
+		background-color: $clr_white;
+		color: $clr_black;
+		padding: 0px 80px 0px;
+		text-align: center;
+		min-height: inherit;
+	}
+
+	@include md {
+		padding: 20px 50px 29px;
+	}
+
+	@include sm {
+		padding: 0px 30px 29px;
+	}
+}

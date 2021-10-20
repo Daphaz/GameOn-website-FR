@@ -1,0 +1,28 @@
+.header {
+	@extend %between;
+	align-items: center;
+	padding: 52.9px 100px 84px;
+
+	&__logo {
+		max-width: 277px;
+		min-width: 103px;
+		transition: all 0.3s ease;
+		img {
+			width: 100%;
+		}
+
+		@include xl {
+			max-width: 168px;
+		}
+	}
+
+	@include lg {
+		padding: 42px 80px 62px;
+	}
+	@include md {
+		padding: 38px 50px 40px;
+	}
+	@include sm {
+		padding: 33px 30px 0px;
+	}
+}
