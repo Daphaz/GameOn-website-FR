@@ -1,0 +1,91 @@
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: $clr-white;
+	opacity: 0;
+	visibility: hidden;
+
+	&__form {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
+		height: fit-content;
+		max-width: 536px;
+		background-color: $clr-black;
+		color: $clr-white;
+		border-radius: 8px;
+		box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
+		padding: 49px 38px 17px;
+
+		@include xl {
+			bottom: 0;
+			left: 0;
+			right: 0;
+			top: 0;
+			transform: inherit;
+			max-width: 100%;
+			border-radius: 8px 8px 0 0;
+		}
+
+		@include sm {
+			padding: 38px 30px 21px;
+			box-shadow: none;
+		}
+	}
+
+	@include xl {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		top: 150px;
+		width: 100%;
+		height: auto;
+	}
+
+	@include md {
+		top: 120px;
+	}
+
+	@include sm {
+		top: 80px;
+		background-color: transparent;
+	}
+
+	&.open {
+		animation: modalOpen 1.4s $ease-out-expo forwards;
+	}
+
+	&.close {
+		animation: modalClose 1.4s $ease-out-expo forwards;
+	}
+}
+
+@keyframes modalOpen {
+	0% {
+		opacity: 0;
+		visibility: visible;
+	}
+	100% {
+		opacity: 1;
+		visibility: visible;
+		z-index: 10;
+	}
+}
+
+@keyframes modalClose {
+	0% {
+		opacity: 1;
+		visibility: visible;
+	}
+	100% {
+		opacity: 0;
+		visibility: hidden;
+		z-index: -10;
+	}
+}

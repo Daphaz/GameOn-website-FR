@@ -19,6 +19,19 @@ body {
 	color: $clr_black;
 
 	transition: 0.3s ease;
+
+	&.no-scroll {
+		@include lg {
+			overflow: hidden;
+		}
+	}
+
+	&.fix-scroll {
+		overflow: hidden;
+		@media screen and (max-width: 1024px) {
+			overflow: initial;
+		}
+	}
 }
 
 a {

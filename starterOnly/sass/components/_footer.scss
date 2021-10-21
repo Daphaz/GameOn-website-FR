@@ -1,4 +1,5 @@
 .footer {
+	padding-bottom: 30px;
 	&__copy {
 		@extend %description-15;
 		color: $clr_red400;
@@ -6,6 +7,7 @@
 
 	@media screen and (max-width: 1463px) {
 		padding: 0px 100px;
+		padding-bottom: 48px;
 	}
 
 	@include lg {
