@@ -1,0 +1,25 @@
+.footer {
+	padding-bottom: 30px;
+	&__copy {
+		@extend %description-15;
+		color: $clr_red400;
+	}
+
+	@media screen and (max-width: 1463px) {
+		padding: 0px 100px;
+		padding-bottom: 48px;
+	}
+
+	@include lg {
+		padding: 0px 80px;
+		padding-bottom: 32px;
+	}
+
+	@include md {
+		padding: 0px 30px;
+		padding-bottom: 24px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}

@@ -1,0 +1,280 @@
+.form {
+	&__control {
+		transition: all 0.2s ease;
+	}
+	&__label {
+		display: block;
+		text-align: justify;
+		font-size: 1.4rem;
+		line-height: 1;
+		padding-bottom: 17px;
+
+		@include sm {
+			padding-bottom: 10px;
+		}
+	}
+	&__location {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+	&__error {
+		display: block;
+		padding: 5px 0 5px 0;
+		color: $clr_red400;
+	}
+	input[type="text"],
+	input[type="email"],
+	input[type="date"],
+	input[type="number"] {
+		height: 65px;
+		border-radius: 8px;
+		outline: none;
+		border: none;
+		width: 100%;
+		display: block;
+		padding: 9px 20px;
+		font-size: 18px;
+		line-height: 1;
+		text-align: justify;
+
+		@include sm {
+			height: 50px;
+			margin-bottom: 0;
+		}
+
+		&.input-error {
+			border: 2px solid $clr_red200;
+		}
+	}
+
+	&__btn {
+		@extend %center;
+		margin-top: 11px;
+		.btn {
+			font-size: 1.4rem;
+			font-weight: 500;
+			line-height: 18px;
+			align-items: center;
+			padding-top: 8px;
+			padding-bottom: 14px;
+			width: 100%;
+			max-width: 182px;
+
+			@include sm {
+				max-width: 141px;
+			}
+		}
+
+		@include sm {
+			margin-top: 0;
+		}
+	}
+
+	&__close {
+		position: absolute;
+		top: 26px;
+		right: 26px;
+		width: 17px;
+		height: 17px;
+		z-index: 1;
+
+		@include sm {
+			top: 20px;
+			right: 20px;
+			width: 13px;
+			height: 13px;
+		}
+	}
+
+	&__overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 8px;
+		background-color: $clr-black;
+		font-size: 3.6rem;
+		line-height: 51px;
+		text-align: center;
+		padding: 20px;
+		opacity: 0;
+		visibility: hidden;
+
+		p {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 100%;
+			max-width: 309px;
+
+			@include md {
+				margin-bottom: 312px;
+				top: 40%;
+			}
+		}
+
+		& .form__btn {
+			position: absolute;
+			bottom: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 100%;
+		}
+
+		&.visible {
+			animation: showOverlay 0.4s $ease-out-expo forwards;
+		}
+	}
+}
+
+// Radio input
+.radio__container {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	position: relative;
+	padding-left: 32px;
+	padding-right: 15px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	font-size: 1.2rem;
+	line-height: 1;
+	font-family: $fnt_rbt;
+	user-select: none;
+	height: 26px;
+
+	@include sm {
+		height: 20px;
+		margin-bottom: 7px;
+		padding-left: 25px;
+	}
+}
+.radio__container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+.radio__checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	background-color: transparent;
+	border: 1px solid $clr_white;
+
+	@include sm {
+		width: 20px;
+		height: 20px;
+	}
+}
+.radio__checkmark::after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+.radio__container input:checked ~ .radio__checkmark::after {
+	display: block;
+}
+.radio__container input:checked ~ .radio__checkmark {
+	border: 1px solid $clr_green;
+}
+.radio__container .radio__checkmark::after {
+	top: 50%;
+	left: 50%;
+	width: 17px;
+	height: 17px;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+	background: $clr_green;
+
+	@include sm {
+		width: 13px;
+		height: 13px;
+	}
+}
+
+// checkbox.
+.checkbox__container {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	position: relative;
+	padding-left: 34px;
+	margin-bottom: 8px;
+	cursor: pointer;
+	font-size: 1.2rem;
+	font-size: 1;
+	user-select: none;
+	height: 25px;
+	width: 100%;
+	max-width: 536px;
+
+	@include sm {
+		height: 20px;
+		padding-left: 25px;
+	}
+}
+.checkbox__container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+.checkbox__checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	background-color: $clr_grey;
+	border-radius: 6px;
+
+	@include sm {
+		height: 20px;
+		width: 20px;
+	}
+}
+.checkbox__container input:checked ~ .checkbox__checkmark {
+	background-color: $clr_green;
+}
+.checkbox__checkmark::after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+.checkbox__container input:checked ~ .checkbox__checkmark::after {
+	display: block;
+}
+.checkbox__container .checkbox__checkmark::after {
+	left: 9px;
+	top: 6px;
+	width: 7px;
+	height: 11px;
+	border: solid $clr_white;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+
+	@include sm {
+		left: 7px;
+		top: 5px;
+		width: 6px;
+		height: 8px;
+	}
+}
+
+@keyframes showOverlay {
+	0% {
+		opacity: 0;
+		visibility: hidden;
+	}
+	100% {
+		opacity: 1;
+		visibility: visible;
+	}
+}
