@@ -5,7 +5,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Reservation</title>
+		<meta name="description" content="Do you live to game?" />
 		<link rel="stylesheet" href="./sass/main.css" />
+		<script type="text/javascript" defer src="./js/menu.js"></script>
+		<script type="text/javascript" defer src="./js/modal.js"></script>
+		<script type="text/javascript" defer src="./js/submit.js"></script>
 	</head>
 	<body>
 		<!-- Header -->
@@ -53,7 +57,9 @@
 				src="./assets/banner-bg.jpg"
 				alt="girl playing video game"
 			/>
-			<button type="button" class="btn btn__primary">Sign Up Now</button>
+			<button id="signup" type="button" class="btn btn__primary">
+				Sign Up Now
+			</button>
 		</section>
 		<!-- End Banner -->
 		<!-- Footer -->
@@ -61,5 +67,103 @@
 			<p class="footer__copy">Copyright 2014 - 2020, GameOn Inc.</p>
 		</footer>
 		<!-- End Footer -->
+		<!-- Modal -->
+		<div class="modal">
+			<form action="post" class="modal__form form">
+				<button type="button" class="form__close">
+					<img src="./assets/close.svg" alt="X" />
+				</button>
+				<div class="form__control">
+					<label class="form__label" for="firstname">First name</label>
+					<input type="text" name="firstname" id="firstname" />
+					<span class="form__error"></span>
+				</div>
+				<div class="form__control">
+					<label class="form__label" for="lastname">Last Name</label>
+					<input type="text" name="lastname" id="lastname" />
+					<span class="form__error"></span>
+				</div>
+				<div class="form__control">
+					<label class="form__label" for="email">Email</label>
+					<input type="email" name="email" id="email" />
+					<span class="form__error"></span>
+				</div>
+				<div class="form__control">
+					<label class="form__label" for="birthdate">Birthdate</label>
+					<input type="date" name="birthdate" id="birthdate" />
+					<span class="form__error"></span>
+				</div>
+				<div class="form__control">
+					<label class="form__label" for="tournament"
+						>How many tournaments have you attended?</label
+					>
+					<input type="number" name="tournament" id="tournament" />
+					<span class="form__error"></span>
+				</div>
+				<div class="form__control">
+					<label class="form__label">Which location?</label>
+					<div class="form__location">
+						<label class="radio__container"
+							>New York
+							<input type="radio" name="location" value="New York" />
+							<span class="radio__checkmark"></span>
+						</label>
+						<label class="radio__container"
+							>San Francisco
+							<input type="radio" name="location" value="San Francisco" />
+							<span class="radio__checkmark"></span>
+						</label>
+						<label class="radio__container"
+							>Seattle
+							<input type="radio" name="location" value="Seattle" />
+							<span class="radio__checkmark"></span>
+						</label>
+						<label class="radio__container"
+							>Chicago
+							<input type="radio" name="location" value="Chicago" />
+							<span class="radio__checkmark"></span>
+						</label>
+						<label class="radio__container"
+							>Boston
+							<input type="radio" name="location" value="Boston" />
+							<span class="radio__checkmark"></span>
+						</label>
+						<label class="radio__container"
+							>Portland
+							<input type="radio" name="location" value="Portland" />
+							<span class="radio__checkmark"></span>
+						</label>
+					</div>
+					<span class="form__error"></span>
+				</div>
+				<div class="form__control">
+					<label class="checkbox__container"
+						>Lorem ipsum dolor sit amet, consectetur adipiscing elit
+						<input type="checkbox" name="lorem1" value="lorem1" />
+						<span class="checkbox__checkmark"></span>
+					</label>
+					<label class="checkbox__container"
+						>Lorem ipsum dolor sit amet, consectetur adipiscing elit
+						<input type="checkbox" name="lorem2" value="lorem2" />
+						<span class="checkbox__checkmark"></span>
+					</label>
+					<span class="form__error"></span>
+				</div>
+				<div class="form__btn">
+					<button class="btn btn__primary" type="submit">Go</button>
+				</div>
+				<!-- Overlay Modal -->
+				<div class="form__overlay">
+					<p>Thank you for submitting your registration details</p>
+					<div class="form__btn">
+						<button id="close-overlay" class="btn btn__primary" type="button">
+							Close
+						</button>
+					</div>
+				</div>
+				<!-- End Overlay Modal -->
+			</form>
+		</div>
+		<!-- End Modal -->
 	</body>
 </html>
