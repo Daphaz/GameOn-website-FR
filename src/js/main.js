@@ -217,6 +217,8 @@ class Display {
 			case "tournament":
 				if (input.element.value.trim() === "") {
 					input.message = "Nombre de concours est requis.";
+				} else if (isNaN(input.element.value)) {
+					input.message = "Veuillez saisir un nombre";
 				} else {
 					this.setValidInput(input);
 					errorElement.innerText = "";
