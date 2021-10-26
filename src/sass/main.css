@@ -231,7 +231,7 @@ table {
   }
 }
 
-@media screen and (max-width: 413px) {
+@media screen and (max-width: 414px) {
   .banner__title {
     font-size: 3.2rem;
     line-height: 42px;
@@ -1267,7 +1267,7 @@ body.fix-scroll {
   overflow: hidden;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
   body.fix-scroll {
     overflow: initial;
   }
