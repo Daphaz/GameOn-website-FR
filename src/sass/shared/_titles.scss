@@ -13,7 +13,7 @@
 		line-height: 62px;
 	}
 
-	@media screen and (max-width: 413px) {
+	@include xs {
 		font-size: 3.2rem;
 		line-height: 42px;
 	}

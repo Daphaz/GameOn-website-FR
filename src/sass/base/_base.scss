@@ -28,7 +28,7 @@ body {
 
 	&.fix-scroll {
 		overflow: hidden;
-		@media screen and (max-width: 1024px) {
+		@include xl {
 			overflow: initial;
 		}
 	}
