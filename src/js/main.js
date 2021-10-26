@@ -80,14 +80,15 @@ class Display {
 	 *  Form Submit.
 	 */
 	initForm() {
-		this.regex =
-			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
 		const inputs = this.fields
 			.map((field) => ({
-				element: document.querySelector(`input[name=${field}]`),
+				element:
+					field === "location"
+						? document.querySelectorAll(`input[name=${field}]`)
+						: document.querySelector(`input[name=${field}]`),
 				message: "",
 				error: false,
+				name: field,
 			}))
 			.filter((val) => val);
 
@@ -103,14 +104,21 @@ class Display {
 			e.preventDefault();
 
 			inputs.forEach((input) => {
-				if (!input.element.value) {
-					this.setStatus("error", input, null);
-				} else {
-					if (input.element.type === "email") {
-						if (!this.regex.test(input.element.value)) {
-							this.setStatus("error", input, "Enter a valid email adress");
-						}
+				if (input.name === "location") {
+					const arr = [...input.element];
+					const isChecked = arr.some((input) => input.checked);
+					if (!isChecked) {
+						this.setErrorInput(input);
 					}
+				} else if (input.name === "lorem1") {
+					const inputLoremChecked = document.querySelector(
+						'input[type="lorem1"]:checked'
+					)?.value;
+					if (!inputLoremChecked) {
+						this.setErrorInput(input);
+					}
+				} else {
+					this.setErrorInput(input);
 				}
 			});
 
@@ -126,64 +134,111 @@ class Display {
 
 	validateOnEntry(inputs) {
 		inputs.forEach((input) => {
-			input.element.addEventListener("input", () => {
-				if (input.element.value.trim() === "") {
-					this.setStatus("error", input, null);
-				} else {
-					if (input.element.type === "email") {
-						if (!this.regex.test(input.element.value)) {
-							this.setStatus("error", input, "Enter a valid email adress");
-						} else {
-							this.setStatus("sucess", input, null);
-						}
-					} else {
-						this.setStatus("sucess", input, null);
-					}
-				}
-			});
+			if (input.name === "location") {
+				const arrLocationInputs = [...input.element];
+				arrLocationInputs.forEach((inp) => {
+					inp.addEventListener("input", () => {
+						this.setErrorInput(input);
+					});
+				});
+			} else {
+				input.element.addEventListener("input", () => {
+					this.setErrorInput(input);
+				});
+			}
 		});
 	}
 
-	setStatus(status, input, message) {
-		const errorElement =
-			input.element.parentElement.querySelector(".form__error");
-		if (status === "sucess") {
-			input.error = false;
-			input.element.classList.remove("input-error");
-			input.message = "";
-			errorElement.innerText = "";
-		}
+	setValidInput(input) {
+		input.error = false;
+		input.message = "";
 
-		if (status === "error") {
-			input.error = true;
-			input.element.classList.add("input-error");
-			this.setMessageError(input, message);
+		if (input.name !== "location") {
+			input.element.classList.remove("input-error");
 		}
 	}
 
-	setMessageError(input, message) {
-		const errorElement =
-			input.element.parentElement.querySelector(".form__error");
+	setErrorInput(input) {
+		let errorElement;
 
-		switch (input.element.name) {
+		input.error = true;
+
+		if (input.name === "location") {
+			errorElement = document.querySelector(".form__error.radio");
+		} else if (input.name === "lorem1") {
+			errorElement = document.querySelector(".form__error.lorem1");
+		} else {
+			errorElement = input.element.parentElement.querySelector(".form__error");
+			input.element.classList.add("input-error");
+		}
+
+		const regex =
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+		switch (input.name) {
 			case "firstname":
-				input.message = "Firstname is required";
+				if (input.element.value.trim() === "") {
+					input.message = "Votre prénom est requis.";
+				} else if (input.element.value.length < 2) {
+					input.message = "Minimum de 2 caractères";
+				} else {
+					this.setValidInput(input);
+					errorElement.innerText = "";
+				}
 				break;
 			case "lastname":
-				input.message = "Lastname is required";
+				if (input.element.value.trim() === "") {
+					input.message = "Votre nom est requis.";
+				} else if (input.element.value.length < 2) {
+					input.message = "Minimum de 2 caractères";
+				} else {
+					this.setValidInput(input);
+					errorElement.innerText = "";
+				}
 				break;
 			case "email":
-				if (message) {
-					input.message = message;
+				if (input.element.value.trim() === "") {
+					input.message = "Votre email est requis.";
+				} else if (!regex.test(input.element.value)) {
+					input.message = "Vous devez entrez un email valide.";
 				} else {
-					input.message = "Email is required";
+					this.setValidInput(input);
+					errorElement.innerText = "";
 				}
 				break;
 			case "birthdate":
-				input.message = "Birthdate is required";
+				if (input.element.value.trim() === "") {
+					input.message = "Vous devez entrer votre date de naissance.";
+				} else {
+					this.setValidInput(input);
+					errorElement.innerText = "";
+				}
 				break;
 			case "tournament":
-				input.message = "Tournament is required";
+				if (input.element.value.trim() === "") {
+					input.message = "Nombre de concours est requis.";
+				} else {
+					this.setValidInput(input);
+					errorElement.innerText = "";
+				}
+				break;
+			case "location":
+				const arrInputs = [...input.element];
+				const isCheckedInputs = arrInputs.some((input) => input.checked);
+				if (!isCheckedInputs) {
+					input.message = "Vous devez choisir une option.";
+				} else {
+					this.setValidInput(input);
+					errorElement.innerText = "";
+				}
+				break;
+			case "lorem1":
+				if (!input.element.checked) {
+					input.message = "Cochez les conditions générales.";
+				} else {
+					this.setValidInput(input);
+					errorElement.innerText = "";
+				}
 				break;
 
 			default:
@@ -198,7 +253,15 @@ class Display {
  *  Selectors.
  */
 const form = document.querySelector(".modal__form");
-const fields = ["firstname", "lastname", "email", "birthdate", "tournament"];
+const fields = [
+	"firstname",
+	"lastname",
+	"email",
+	"birthdate",
+	"tournament",
+	"location",
+	"lorem1",
+];
 const buttonMenu = document.querySelector(".navbar__toggle");
 const navbar = document.querySelector(".navbar");
 const modal = document.querySelector(".modal");
