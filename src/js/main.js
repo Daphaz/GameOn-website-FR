@@ -182,7 +182,7 @@ class Display {
 
 		function isValidDate(value) {
 			const date = Date.parse(value);
-			return dateNow > date;
+			return dateNow < date;
 		}
 
 		switch (input.name) {
@@ -224,7 +224,7 @@ class Display {
 				if (input.element.value.trim() === "") {
 					input.message = "Vous devez entrer votre date de naissance.";
 				} else if (isValidDate(input.element.value)) {
-					input.message = "La date doit être supérieur à aujourd'hui";
+					input.message = "La date doit être inférieur à aujourd'hui";
 				} else {
 					this.setValidInput(input);
 					errorElement.innerText = "";
