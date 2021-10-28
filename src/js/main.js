@@ -160,6 +160,7 @@ class Display {
 
 	setErrorInput(input) {
 		let errorElement;
+		const dateNow = Date.now();
 
 		input.error = true;
 
@@ -175,12 +176,23 @@ class Display {
 		const regex =
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+		function hasNumber(myString) {
+			return /\d/.test(myString);
+		}
+
+		function isValidDate(value) {
+			const date = Date.parse(value);
+			return dateNow > date;
+		}
+
 		switch (input.name) {
 			case "firstname":
 				if (input.element.value.trim() === "") {
 					input.message = "Votre prénom est requis.";
 				} else if (input.element.value.length < 2) {
 					input.message = "Minimum de 2 caractères";
+				} else if (hasNumber(input.element.value)) {
+					input.message = "Veuillez saisir des lettres";
 				} else {
 					this.setValidInput(input);
 					errorElement.innerText = "";
@@ -191,6 +203,8 @@ class Display {
 					input.message = "Votre nom est requis.";
 				} else if (input.element.value.length < 2) {
 					input.message = "Minimum de 2 caractères";
+				} else if (hasNumber(input.element.value)) {
+					input.message = "Veuillez saisir des lettres";
 				} else {
 					this.setValidInput(input);
 					errorElement.innerText = "";
@@ -209,6 +223,8 @@ class Display {
 			case "birthdate":
 				if (input.element.value.trim() === "") {
 					input.message = "Vous devez entrer votre date de naissance.";
+				} else if (isValidDate(input.element.value)) {
+					input.message = "La date doit être supérieur à aujourd'hui";
 				} else {
 					this.setValidInput(input);
 					errorElement.innerText = "";
